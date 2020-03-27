@@ -1,7 +1,7 @@
 class Api::UsersController < ApplicationController
 
   # remove before deploy/production
-  skip_before_action :verify_authenticity_token
+  # skip_before_action :verify_authenticity_token
 
   def create
     @user = User.new(user_params)
@@ -9,7 +9,7 @@ class Api::UsersController < ApplicationController
     if @user.save
       # login(@user)
       # render "api/users/show"
-      render json: @user
+      render json: @user # this is for testing purposes
     else
       render json: @user.errors.full_messages, status: 422
     end
@@ -20,7 +20,7 @@ class Api::UsersController < ApplicationController
 
     if @user
       # render :show
-      render json: "showing a user"
+      render json: @user # this is for testing purposes
     else
       render json: @user.errors.full_messages, status: 404
     end

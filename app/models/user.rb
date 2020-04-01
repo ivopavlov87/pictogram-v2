@@ -35,13 +35,25 @@ class User < ApplicationRecord
   before_save :strip_email
 
   def self.find_by_credentials(login_input, password)
-    user = login_input.include?("@") ? User.find_by(email: login_input) :
-      User.find_by(username: login_input)
+
+    # cleans up entered email address to remove any tag(s)
+    # prior to login
+    user = nil;
+    if (login_input.include?("@"))
+      parts = login_input.split("@")
+      parts[0].gsub!('.','')
+      parts[0] = parts[0].split('+')[0]
+      login_input = parts.join("@")
+      user = User.find_by(email: login_input)
+    else
+      user = User.find_by(username: login_input)
+    end
 
     user && user.is_password?(password) ? user : nil
   end
 
   # cleans up entered email address to remove any tag(s)
+  # prior to saving to database
   def strip_email
     parts = self.email.split("@")
     parts[0].gsub!('.','')

@@ -1,4 +1,7 @@
 class Api::SessionsController < ApplicationController
+
+  protect_from_forgery unless: -> { request.format.json? }
+
   def create
     @user = User.find_by_credentials(params[:user][:login_input], params[:user][:password])
 

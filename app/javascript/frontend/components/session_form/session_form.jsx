@@ -5,7 +5,7 @@ class SessionForm extends React.Component {
     super(props);
 
     this.state = {
-      login_input: '',
+      loginInput: '',
       username: '',
       name: '',
       email: '',
@@ -33,7 +33,11 @@ class SessionForm extends React.Component {
       };
       user = Object.assign({}, newUser)
     } else {
-      user = Object.assign({}, this.state);
+      const returningUser = {
+        login_input: this.state.loginInput,
+        password: this.state.password
+      }
+      user = Object.assign({}, returningUser);
     }
     this.props.processForm(user).then(() => {
       this.props.history.push('/loggedInSucess')
@@ -66,7 +70,7 @@ class SessionForm extends React.Component {
               <label>
                 <input type="text"
                   placeholder="Username or Email"
-                  onChange={this.update('login_input')}
+                  onChange={this.update('loginInput')}
                 />
               </label>
               <br />

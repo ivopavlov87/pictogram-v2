@@ -7,9 +7,9 @@ class Api::UsersController < ApplicationController
     @user = User.new(user_params)
 
     if @user.save
-      # login(@user)
-      # render "api/users/show"
-      render json: @user # this is for testing purposes
+      login(@user)
+      render "api/users/show"
+      # render json: @user # this is for testing purposes
     else
       render json: @user.errors.full_messages, status: 422
     end
@@ -19,8 +19,8 @@ class Api::UsersController < ApplicationController
     @user = User.find(params[:id])
 
     if @user
-      # render :show
-      render json: @user # this is for testing purposes
+      render :show
+      # render json: @user # this is for testing purposes
     else
       render json: @user.errors.full_messages, status: 404
     end

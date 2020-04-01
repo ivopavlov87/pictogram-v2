@@ -32,7 +32,7 @@ class User < ApplicationRecord
 
   after_initialize :ensure_session_token
 
-  before_validation :strip_email
+  before_save :strip_email
 
   def self.find_by_credentials(login_input, password)
     user = login_input.include?("@") ? User.find_by(email: login_input) :

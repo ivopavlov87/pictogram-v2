@@ -32,6 +32,14 @@ function UserInfo(props) {
       });
     }
 
+    // removes warning, "form submission cancelled because form is not connect"
+    // on cancel edit and reverts user info display to reflect what is on database
+    function endEdit(e){
+      e.preventDefault();
+      props.clearErrors();
+      props.endEdit();
+    }
+
     // error rendering
     function RenderErrors(props){
       return (
@@ -95,7 +103,7 @@ function UserInfo(props) {
             {userBio ? userBio.length : "0"}/255 characters
           </label>
           <br />
-          <button onClick={props.endEdit}>Cancel Edit</button>
+          <button onClick={endEdit}>Cancel Edit</button>
           &nbsp;
           <input type="submit" value="Submit Edit" />
         </form>

@@ -39,15 +39,12 @@ class UserProfile extends React.Component {
   }
 
   // removes edit display
-  endEdit(e){
-    // preventDefault removes warning discussing "form submission cancelled due to form
-    // not being connected"
-    e.preventDefault();
+  endEdit(){
+    // fetching user restores user info display to reflect info on database
     this.setState({
       editProfile: false
     })
     this.props.fetchUser(this.props.match.params.userId);
-    this.props.clearErrors();
   }
 
   render() {

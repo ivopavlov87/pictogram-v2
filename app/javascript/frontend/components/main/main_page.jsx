@@ -34,7 +34,6 @@ class MainPage extends React.Component {
 
     return (
       <div>
-        This is inside the Main_Page.jsx
         <h3>{splashText}</h3>
         <input type="submit"
           onClick={this.handleClick}

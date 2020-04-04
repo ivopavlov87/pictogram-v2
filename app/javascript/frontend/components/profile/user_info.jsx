@@ -11,14 +11,14 @@ function UserInfo(props) {
   }
 
   // if edit from parent component is true, render edit-version
-  // of user info
-  if (props.edit){
+  // of user info and initiate state for holding user-editted info
+  if (props.editState){
     const [userUsername, setUserUsername] = useState(props.user.username)
     const [userName, setUserName] = useState(props.user.name)
     const [userEmail, setUserEmail] = useState(props.user.email)
     const [userBio, setUserBio] = useState(props.user.bio)
-    // const [userErrors, setUserErrors] = useState(props.errors)
 
+    // dealing with updated info submission
     function submitEdit(e){
       e.preventDefault();
       const user = props.user;
@@ -26,21 +26,14 @@ function UserInfo(props) {
       user.name = userName;
       user.email = userEmail;
       user.bio = userBio;
-      props.updateUser(user).then(arg => {
-        // console.log("arg", arg)
-        // if (Object.keys(props.errors).length !== 0) {
-          props.clearErrors();
-          props.submitEdit();
-        // } else {
-        //   props.clearErrors();
-        //   props.submitEdit();
-        // }
+      props.updateUser(user).then(() => {
+        props.clearErrors();
+        props.endEdit();
       });
-      // props.submitEdit();
     }
 
+    // error rendering
     function RenderErrors(props){
-      console.log("render error props", props)
       return (
         <ul>
           {Object.keys(props.errors).map((error, i) => (
@@ -50,10 +43,9 @@ function UserInfo(props) {
       )
     }
 
+    // user edit form
     return (
       <div>
-        The user is going to edit!
-        <br />
         <form onSubmit={submitEdit}>
           <label>
             Username:
@@ -89,8 +81,6 @@ function UserInfo(props) {
               value={userEmail}
               onChange={(e) => setUserEmail(e.target.value)}
             />
-            <br />
-            {userUsername.length}/30 characters
           </label>
           <br />
           <label>
@@ -105,14 +95,21 @@ function UserInfo(props) {
             {userBio ? userBio.length : "0"}/255 characters
           </label>
           <br />
-          <input type="submit" value="Submit Edits" />
+          <button onClick={props.endEdit}>Cancel Edit</button>
+          &nbsp;
+          <input type="submit" value="Submit Edit" />
         </form>
         <RenderErrors errors={props.errors} />
       </div>
     );
   }
 
+
+  // default user info display:
+  // by default editLink is empty div
   let editLink = <div></div>;
+
+  // show edit button if logged in user is owner of page, OR if user is an admin
   if (props.user.id === props.currentUser.id || props.currentUser.admin_type) {
     editLink = <button onClick={props.beginEdit}>Edit Profile</button>;
   }

@@ -19,3 +19,5 @@ export default (state = _nullErrors, action) => {
       return state;
   }
 };
+
+// deals with invalid log in credentials and errors in account creation

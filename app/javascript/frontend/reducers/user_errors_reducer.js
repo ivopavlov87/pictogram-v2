@@ -19,3 +19,6 @@ export default (state = _nullErrors, action) => {
       return state;
   }
 };
+
+// NOTE: These errors deal with user account updates, not account creation
+// account creation errors are handled by session errors reducer

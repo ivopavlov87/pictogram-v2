@@ -12,13 +12,11 @@ const App = () => (
   <div>
     <NavBarContainer />
     <div>
-      Hello from inside the app JSX which is inside the root
       <Switch>
         <AuthRoute exact path="/" component={MainPageContainer} />
-        <ProtectedRoute exact path="/users/:userId" component={UserProfile} />
         <ProtectedRoute exact path="/loggedInSucess" component={userLoggedIn} />
+        <ProtectedRoute exact path="/users/:userId" component={UserProfile} />
       </Switch>
-      {/* <MainPageContainer /> */}
     </div>
   </div>
 )

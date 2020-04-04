@@ -46,6 +46,7 @@ export const login = user => dispatch => (
   ))
 );
 
+// logs out and redirects to splash page for login
 export const logout = () => dispatch => (
   APIUtil.logout().then(user => (
     (window.location.href = "/").then(

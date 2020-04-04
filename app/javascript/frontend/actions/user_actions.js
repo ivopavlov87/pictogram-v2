@@ -16,6 +16,8 @@ const receiveUsers = users => ({
   users
 });
 
+// these are the errors that are created on improper user info updates
+// NOTE: errors during improper user account creation are part of SESSION errors
 export const receiveErrors = (errors) => ({
   type: RECEIVE_USER_ERRORS,
   errors,

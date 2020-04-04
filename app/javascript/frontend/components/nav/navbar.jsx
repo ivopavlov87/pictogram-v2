@@ -5,20 +5,20 @@ class NavBar extends React.Component {
   
   render() {
 
+    // only display links if a user is logged in
     if (this.props.currentUser){
       return (
         <div>
-          <Link to={`users/${this.props.currentUser.id}`}>Profile</Link>
+          <Link to={`/users/${this.props.currentUser.id}`}>Profile</Link>
           &nbsp;
           <button onClick={this.props.logout}>Logout</button>
         </div>
       );
     }
 
+    // if no user is logged in return nothing => empty div
     return (
-      <div>
-        This is inside the nav bar component! A user is not logged in.
-      </div>
+      <div></div>
     )
   }
 }

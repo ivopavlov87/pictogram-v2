@@ -4,12 +4,15 @@ import { Link } from 'react-router-dom';
 class NavBar extends React.Component {
   
   render() {
-    console.log(this.props)
 
     if (this.props.currentUser){
       return (
-        <button onClick={this.props.logout}>Logout</button>
-      )
+        <div>
+          <Link to={`users/${this.props.currentUser.id}`}>Profile</Link>
+          &nbsp;
+          <button onClick={this.props.logout}>Logout</button>
+        </div>
+      );
     }
 
     return (

@@ -6,11 +6,13 @@ environment.plugins.prepend(
   new webpack.ProvidePlugin({
     $: "jquery",
     jQuery: "jquery"
+    // $: "jquery/src/jquery",
+    // jQuery: "jquery/src/jquery",
   })
 );
 
 const aliasConfig = {
-  jquery: "jquery-ui-dist/external/jquery/jquery.js",
+  jQuery: "jquery-ui-dist/external/jquery/jquery.js",
   "jquery-ui": "jquery-ui-dist/jquery-ui.js"
 };
 

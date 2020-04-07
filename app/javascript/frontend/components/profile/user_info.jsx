@@ -26,9 +26,13 @@ function UserInfo(props) {
       user.name = userName;
       user.email = userEmail;
       user.bio = userBio;
-      props.updateUser(user).then(() => {
-        props.clearErrors();
-        props.endEdit();
+      props.updateUser(user).then(response => {
+        // only clear the errors is the response on update has no errors
+        // also, revert edit state back to false
+        if(!response.errors){
+          props.clearErrors();
+          props.endEdit();
+        }
       });
     }
 
@@ -115,17 +119,21 @@ function UserInfo(props) {
 
   // default user info display:
   // by default editLink is empty div
-  let editLink = <div></div>;
+  let editLink = "";
 
   // show edit button if logged in user is owner of page, OR if user is an admin
   if (props.user.id === props.currentUser.id || props.currentUser.admin_type) {
-    editLink = <button onClick={props.beginEdit}>Edit Profile</button>;
+    editLink = (
+      <div>
+        <button onClick={props.beginEdit}>Edit Profile</button>
+        <br />
+      </div>
+    );
   }
 
   return (
     <div>
       {editLink}
-      <br />
       {props.user.username}
       <br />
       {props.user.name}

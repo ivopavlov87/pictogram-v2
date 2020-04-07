@@ -1,0 +1,1 @@
+json.extract! post, :id, :caption, :location, :user_id

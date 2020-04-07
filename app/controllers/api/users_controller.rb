@@ -3,14 +3,14 @@ class Api::UsersController < ApplicationController
   # remove before deploy/production
   # skip_before_action :verify_authenticity_token
 
-  protect_from_forgery unless: -> { request.format.json? }
+  # protect_from_forgery unless: -> { request.format.json? }
 
   def create
     @user = User.new(user_params)
 
     if @user.save
       login(@user)
-      render "api/users/show"
+      render :show
       # render json: @user # this is for testing purposes
     else
       render json: @user.errors.full_messages, status: 422

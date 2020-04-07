@@ -1,13 +1,14 @@
 class Api::SessionsController < ApplicationController
 
-  protect_from_forgery unless: -> { request.format.json? }
+  # protect_from_forgery unless: -> { request.format.json? }
 
   def create
     @user = User.find_by_credentials(params[:user][:login_input], params[:user][:password])
 
     if @user
       login(@user)
-      render "api/users/show"
+      # render "api/users/show"
+      render :show
       # render json: @user # this is for testing purposes
     else
       render json: ["Invalid credentials"], status: 401
@@ -20,7 +21,8 @@ class Api::SessionsController < ApplicationController
     if @user
       logout
       # render "api/users/show"
-      render json: ["Successfully logged out"] # this is for testing purposes
+      render :show
+      # render json: ["Successfully logged out"] # this is for testing purposes
     else
       render json: ["No user is signed in"], status: 404
     end

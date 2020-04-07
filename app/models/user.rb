@@ -34,6 +34,8 @@ class User < ApplicationRecord
 
   before_save :strip_email
 
+  has_many :posts, dependent: :destroy
+
   def self.find_by_credentials(login_input, password)
 
     # cleans up entered email address to remove any tag(s)

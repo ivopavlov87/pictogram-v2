@@ -42,13 +42,13 @@ export const fetchAllPosts = () => dispatch => (
 )
 
 export const createPost = post => dispatch => (
-  APIUtil.createPost(post).then(post => dispatch(receivePost(post)))
-    .catch(err => console.log(err))
+  APIUtil.createPost(post).then(post => dispatch(receivePost(post)),
+    err => dispatch(receiveErrors(err.responseJSON)))
 )
 
 export const updatePost = post => dispatch => (
-  APIUtil.updatePost(post).then(post => dispatch(receivePost(post)))
-    .catch(err => console.log(err))
+  APIUtil.updatePost(post).then(post => dispatch(receivePost(post)),
+    err => dispatch(receiveErrors(err.responseJSON)))
 )
 
 export const deletePost = id => dispatch => (

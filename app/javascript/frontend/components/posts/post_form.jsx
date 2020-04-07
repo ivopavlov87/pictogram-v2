@@ -51,7 +51,7 @@ function PostForm(props){
             onChange={(e) => setPostLocation(e.target.value)}
           />
           <br />
-          {postLocation.length}/255 characters
+          {postLocation ? postLocation.length : "0"}/255 characters
         </label>
         <br />
         <label>
@@ -66,11 +66,12 @@ function PostForm(props){
             onChange={(e) => setPostCaption(e.target.value)}
           />
           <br />
-          {postCaption.length}/1,000 characters
+          {postCaption ? postCaption.length : "0"}/1,000 characters
         </label>
         <br />
         <input type="submit" value="Create New Post" />
       </form>
+      <RenderErrors errors={props.errors} />
     </div>
   )
 

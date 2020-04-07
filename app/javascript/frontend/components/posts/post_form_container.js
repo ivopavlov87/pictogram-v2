@@ -4,7 +4,7 @@ import PostForm from './post_form';
 
 const mapStateToProps = (state, ownProps) => ({
   currentUser: state.entities.users[state.session.id],
-  errors: state.errors.posts,
+  errors: state.errors.post,
 })
 
 const mapDispatchToProps = dispatch => ({

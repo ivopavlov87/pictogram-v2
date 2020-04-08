@@ -6,7 +6,7 @@ class Api::PostsController < ApplicationController
   end
 
   def show
-    @post = Post.find(params[:id])
+    @post = Post.includes(:user).find(params[:id])
 
     if @post
       render :show
@@ -43,7 +43,7 @@ class Api::PostsController < ApplicationController
     if @post && (@post.user_id == current_user.id || current_user.admin_type)
       @post.destroy
       # attention:
-      render :index
+      # render :index
     else
       render json: @post.errors.full_messages, status: 404
     end

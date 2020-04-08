@@ -6,6 +6,7 @@ import NavBarContainer from './nav/navbar_container';
 import MainPageContainer from './main/main_page_container';
 import UserProfile from './profile/user_profile_container';
 import PostForm from './posts/post_form_container';
+import PostItem from './posts/post_item_container';
 
 import userLoggedIn from './test/test';
 
@@ -18,6 +19,7 @@ const App = () => (
         <ProtectedRoute exact path="/loggedInSucess" component={userLoggedIn} />
         <ProtectedRoute exact path="/users/:userId" component={UserProfile} />
         <ProtectedRoute exact path="/posts/new" component={PostForm} />
+        <ProtectedRoute exact path="/posts/:postId" component={PostItem} />
       </Switch>
     </div>
   </div>

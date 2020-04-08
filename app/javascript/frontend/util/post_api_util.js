@@ -22,6 +22,7 @@ export const createPost = post => (
     headers: csrf_token,
     processData: false,
     contentType: false,
+    error: err => console.log(err)
   })
 )
 
@@ -30,7 +31,11 @@ export const updatePost = post => (
     method: `PATCH`,
     url: `/api/posts/${post.id}`,
     data: { post },
-    headers: csrf_token
+    headers: csrf_token,
+    // processData and contentType not needed for update
+    // processData: false,
+    // contentType: false,
+    error: err => console.log(err)
   })
 )
 

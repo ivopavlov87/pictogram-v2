@@ -17,30 +17,61 @@ function PostForm(props){
     );
   }
 
-  function handleNewPostSubmit(e){
+  // renders a cancel edit button if endEdit is passed down as a prop
+  // meaning: post is being editted otherwise empty div; this is a component
+  function CancelEdit(){
+    if(props.endEdit){
+      return (
+        <div>
+          <button onClick={props.endEdit}>Cancel Edit</button>&nbsp;
+        </div>
+      );
+    }
+
+    return (
+      <div></div>
+    )
+  }
+
+  // conditionally deal with submission based on new or edit
+  function handlePostSubmit(e){
     e.preventDefault();
 
-    const post = new FormData();
-    post.append("post[caption]", postCaption);
-    post.append("post[location]", postLocation);
-    post.append("post[user_id]", props.currentUser.id);
+    if(!props.postEdit){
+      const newPost = new FormData();
+      newPost.append("post[caption]", postCaption);
+      newPost.append("post[location]", postLocation);
+      newPost.append("post[user_id]", props.currentUser.id);
 
-    // const post = {};
-    // post.caption = postCaption;
-    // post.location = postLocation;
-    // post.user_id = props.currentUser.id;
-    props.createPost(post).then(response => {
-      if (!response.errors){
-        props.clearErrors();
-        console.log("post creation successful")
-      }
-    })
+      props.createPost(newPost).then(response => {
+        if (!response.errors){
+          props.clearErrors();
+          props.history.push(`/posts/${response.post.id}`)
+        }
+      })
+    }
+
+    if(props.postEdit){
+      const updatedPost = props.post;
+      updatedPost.caption = postCaption;
+      updatedPost.location = postLocation;
+
+      props.updatePost(updatedPost).then(response => {
+        if (!response.errors){
+          props.clearErrors();
+          props.endEdit();
+        }
+      })
+    }
   }
+
+  // conditionally render what is on the submit button
+  let submitButtonText = props.postEdit ? "Update Post" : "Create New Post";
 
   return (
     <div>
       This is the Post Form
-      <form onSubmit={handleNewPostSubmit}>
+      <form onSubmit={handlePostSubmit}>
         <label>
           Location:
           <br />
@@ -69,7 +100,8 @@ function PostForm(props){
           {postCaption ? postCaption.length : "0"}/1,000 characters
         </label>
         <br />
-        <input type="submit" value="Create New Post" />
+        <CancelEdit />
+        <input type="submit" value={submitButtonText} />
       </form>
       <RenderErrors errors={props.errors} />
     </div>

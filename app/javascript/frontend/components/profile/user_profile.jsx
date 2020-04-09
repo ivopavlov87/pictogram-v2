@@ -10,8 +10,7 @@ class UserProfile extends React.Component {
     // toggles whether the edit user info form is displayed
     // on child component
     this.state = {
-      editProfile: false,
-      deletedPost: false
+      editProfile: false
     }
 
     this.beginEdit = this.beginEdit.bind(this);
@@ -32,11 +31,6 @@ class UserProfile extends React.Component {
       this.props.fetchUser(this.props.match.params.userId);
       this.props.clearErrors();
     }
-
-    if (this.state.deletedPost) {
-      this.setState({ deletedPost: false });
-      this.props.fetchUser(this.props.match.params.userId);
-    }
   }
 
   // initiates edit display
@@ -47,9 +41,8 @@ class UserProfile extends React.Component {
   }
 
   deletePost(id){
-    this.props.deletePost(id);
-    this.props.fetchUser(this.props.match.params.userId);
-    this.setState({ deletedPost: true })
+    this.props.deletePost(id).then(() => (
+      this.props.fetchUser(this.props.match.params.userId)))
   }
 
   // removes edit display

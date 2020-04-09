@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { fetchPost, deletePost } from '../../actions/post_actions';
 
-import PostItem from './post_item';
+import PostShow from './post_show';
 
 const mapStateToProps = (state, ownProps) => ({
   currentUser: state.entities.users[state.session.id],
@@ -16,4 +16,4 @@ const mapDispatchToProps = dispatch => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(PostItem);
+)(PostShow);

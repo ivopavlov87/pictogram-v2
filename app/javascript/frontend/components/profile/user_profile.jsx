@@ -1,6 +1,7 @@
 import React from 'react';
 
 import UserInfo from './user_info'
+import PostFeedItem from '../posts/post_feed_item';
 
 class UserProfile extends React.Component {
   constructor(props){
@@ -10,10 +11,12 @@ class UserProfile extends React.Component {
     // on child component
     this.state = {
       editProfile: false,
+      deletedPost: false
     }
 
     this.beginEdit = this.beginEdit.bind(this);
     this.endEdit = this.endEdit.bind(this);
+    this.deletePost = this.deletePost.bind(this);
   }
 
   // fetch user when component mounts
@@ -29,6 +32,11 @@ class UserProfile extends React.Component {
       this.props.fetchUser(this.props.match.params.userId);
       this.props.clearErrors();
     }
+
+    if (this.state.deletedPost) {
+      this.setState({ deletedPost: false });
+      this.props.fetchUser(this.props.match.params.userId);
+    }
   }
 
   // initiates edit display
@@ -36,6 +44,12 @@ class UserProfile extends React.Component {
     this.setState({
       editProfile: true
     })
+  }
+
+  deletePost(id){
+    this.props.deletePost(id);
+    this.props.fetchUser(this.props.match.params.userId);
+    this.setState({ deletedPost: true })
   }
 
   // removes edit display
@@ -73,6 +87,20 @@ class UserProfile extends React.Component {
           clearErrors={this.props.clearErrors}
           editState={this.state.editProfile}
         />
+        <br />
+        {this.props.user.username}'s posts:
+        <ul>
+          {Object.values(this.props.user.posts).map((post) => (
+            <li key={`post-${post.id}`}>
+              <PostFeedItem
+                post={post}
+                currentUser={this.props.currentUser}
+                user={this.props.user}
+                deletePost={this.deletePost}
+              />
+            </li>
+          ))}
+        </ul>
       </div>
     );
   }

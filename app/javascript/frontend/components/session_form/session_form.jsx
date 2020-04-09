@@ -41,11 +41,7 @@ class SessionForm extends React.Component {
       };
       user = Object.assign({}, returningUser);
     }
-    this.props.processForm(user).then((response) => {
-      if (Object.keys(this.props.errors).length === 0) {
-        this.props.history.push(`/users/${response.currentUser.id}`);
-      }
-    });
+    this.props.processForm(user)
   }
 
   async prettyDemoUser(e) {

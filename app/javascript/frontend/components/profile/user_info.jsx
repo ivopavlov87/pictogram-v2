@@ -134,13 +134,13 @@ function UserInfo(props) {
   return (
     <div>
       {editLink}
-      {props.user.username}
+      Username: {props.user.username}
       <br />
-      {props.user.name}
+      Name: {props.user.name}
       <br />
-      {props.user.bio}
+      About {props.user.username}:{props.user.bio}
     </div>
-  )
+  );
 }
 
 export default withRouter(UserInfo);

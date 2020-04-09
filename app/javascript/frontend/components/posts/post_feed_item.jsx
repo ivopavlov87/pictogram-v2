@@ -1,25 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import { withRouter } from 'react-router-dom';
+import React, { useState } from 'react';
+import { withRouter, Link } from 'react-router-dom';
 
-import PostForm from './post_form_container'
+import PostForm from './post_form_container';
 
-function PostItem(props){
+function PostFeedItem(props){
 
   const [postEdit, setPostEdit] = useState(false);
-  
-  useEffect(() => {
-    props.fetchPost(props.match.params.postId)
-  }, [props.match.params.postId])
-
-  // if the post hasn't been fetched/loaded return
-  // empty div
-  if (!props.post){
-    return (
-      <div>
-        Loading...
-      </div>
-    )
-  }
 
   function endEdit() {
     setPostEdit(false);
@@ -32,7 +18,7 @@ function PostItem(props){
     function handleDelete(e){
       e.preventDefault();
 
-      props.history.push(`/users/${props.post.author.id}`)
+      // props.history.push(`/users/${props.post.author.id}`)
       props.deletePost(props.post.id)
     }
 
@@ -61,17 +47,23 @@ function PostItem(props){
     )
   }
 
+  const postAuthor = (
+    <Link to={`users/${props.post.user_id}`}>{props.post.author.username}</Link>
+  )
+
   // default render => displayed post
   return (
     <div>
       {postOptions}
-      Post author: {props.post.author.username}
+      Post author: {postAuthor}
       <br />
       Post location: {props.post.location}
       <br />
       Post caption: {props.post.caption}
+      <br />
+      <br />
     </div>
   );
 }
 
-export default withRouter(PostItem);
+export default withRouter(PostFeedItem);

@@ -1,17 +1,20 @@
 import { connect } from 'react-redux';
 import { fetchUser, updateUser, clearErrors } from '../../actions/user_actions';
+import { deletePost } from '../../actions/post_actions';
 
 import UserProfile from './user_profile';
 
 const mapStateToProps = (state, ownProps) => ({
   errors: state.errors.user,
   currentUser: state.entities.users[state.session.id],
-  user: state.entities.users[ownProps.match.params.userId]
+  user: state.entities.users[ownProps.match.params.userId],
+  // posts: state.entities.users[ownProps.match.params.userId].posts
 })
 
 const mapDispatchToProps = dispatch => ({
   fetchUser: (id) => dispatch(fetchUser(id)),
   updateUser: (user) => dispatch(updateUser(user)),
+  deletePost: id => dispatch(deletePost(id)),
   clearErrors: () => dispatch(clearErrors())
 })
 

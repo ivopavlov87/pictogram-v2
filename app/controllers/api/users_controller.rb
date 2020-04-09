@@ -10,19 +10,18 @@ class Api::UsersController < ApplicationController
 
     if @user.save
       login(@user)
-      render :show
-      # render json: @user # this is for testing purposes
+      render :show, status: 200
     else
       render json: @user.errors.full_messages, status: 422
     end
   end
 
   def show
-    @user = User.find(params[:id])
+    @user = User.includes(:posts).find(params[:id])
+    @posts = @user.posts
 
     if @user
-      render :show
-      # render json: @user # this is for testing purposes
+      render :show, status: 200
     else
       render json: @user.errors.full_messages, status: 404
     end
@@ -37,7 +36,7 @@ class Api::UsersController < ApplicationController
     @user = User.find(params[:id])
 
     if @user.update(user_params)
-      render :show
+      render :show, status: 200
     else
       render json: @user.errors.full_messages, status: 422
     end

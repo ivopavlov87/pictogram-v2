@@ -36,7 +36,7 @@ export const fetchPost = id => dispatch => (
     .catch(err => console.log(err))
 );
 
-export const fetchAllPosts = () => dispatch => (
+export const fetchPosts = () => dispatch => (
   APIUtil.fetchPosts().then(posts => dispatch(receivePosts(posts)))
     .catch(err => console.log(err))
 )

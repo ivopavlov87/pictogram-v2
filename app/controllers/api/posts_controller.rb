@@ -21,8 +21,6 @@ class Api::PostsController < ApplicationController
     if @post.save
       render :show
     else
-      p "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
-      p @post.errors.full_messages
       render json: @post.errors.full_messages, status: 422
     end
   end

@@ -9,6 +9,8 @@ class NavBar extends React.Component {
     if (this.props.currentUser){
       return (
         <div>
+          <Link to={`/feed`}>Feed</Link>
+          &nbsp;
           <Link to={`/users/${this.props.currentUser.id}`}>Profile</Link>
           &nbsp;
           <Link to={`/posts/new`}>New Post</Link>

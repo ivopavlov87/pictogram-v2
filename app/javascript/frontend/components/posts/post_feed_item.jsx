@@ -18,7 +18,6 @@ function PostFeedItem(props){
     function handleDelete(e){
       e.preventDefault();
 
-      // props.history.push(`/users/${props.post.author.id}`)
       props.deletePost(props.post.id)
     }
 

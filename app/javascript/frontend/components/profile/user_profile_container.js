@@ -8,7 +8,6 @@ const mapStateToProps = (state, ownProps) => ({
   errors: state.errors.user,
   currentUser: state.entities.users[state.session.id],
   user: state.entities.users[ownProps.match.params.userId],
-  // posts: state.entities.users[ownProps.match.params.userId].posts
 })
 
 const mapDispatchToProps = dispatch => ({

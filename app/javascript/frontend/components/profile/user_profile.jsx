@@ -3,6 +3,8 @@ import React from 'react';
 import UserInfo from './user_info'
 import PostFeedItem from '../posts/post_feed_item';
 
+import defaultProfilePic from '../../../../assets/images/default_user_photo.png';
+
 class UserProfile extends React.Component {
   constructor(props){
     super(props)
@@ -69,6 +71,7 @@ class UserProfile extends React.Component {
     // this is the default display once the user is fetched, used for viewing and editting
     return (
       <div>
+        <img src={this.props.user.profilePicture} ></img>
         <UserInfo
           user={this.props.user}
           currentUser={this.props.currentUser}

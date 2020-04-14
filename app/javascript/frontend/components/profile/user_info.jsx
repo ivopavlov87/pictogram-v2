@@ -138,7 +138,7 @@ function UserInfo(props) {
       <br />
       Name: {props.user.name}
       <br />
-      About {props.user.username}:{props.user.bio}
+      About {props.user.username}: {props.user.bio}
     </div>
   );
 }

@@ -8,4 +8,10 @@ json.posts @posts do |post|
   json.partial! 'api/posts/post', post: post
 end
 
-json.profilePicture image_url('default_user_photo.png')
+# json.profilePicture image_url('default_user_photo.png')
+
+if user.profile_picture.attached?
+  json.profilePicture url_for(user.profile_picture)
+else
+  json.profilePicture image_url('default_user_photo.png')
+end

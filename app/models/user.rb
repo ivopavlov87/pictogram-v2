@@ -34,6 +34,8 @@ class User < ApplicationRecord
 
   before_save :strip_email
 
+  has_one_attached :profile_picture
+
   has_many :posts, dependent: :destroy
 
   def self.find_by_credentials(login_input, password)

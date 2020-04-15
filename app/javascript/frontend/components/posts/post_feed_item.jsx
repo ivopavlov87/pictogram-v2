@@ -50,11 +50,17 @@ function PostFeedItem(props){
     <Link to={`users/${props.post.user_id}`}>{props.post.author.username}</Link>
   )
 
+  // ATTENTION - REMOVE FOR CSS STYLING LATER
+  const authorPicture = (
+    <img height="300px" width="300px" src={props.post.author.profilePicture} ></img>
+  )
+
   // default render => displayed post
   return (
     <div>
-      {postOptions}
       Post author: {postAuthor}
+      {postOptions}
+      {authorPicture}
       <br />
       Post location: {props.post.location}
       <br />

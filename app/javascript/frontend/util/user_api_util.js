@@ -16,6 +16,17 @@ export const editUser = user => (
   })
 )
 
+export const editUserPicture = (id, data) => (
+  $.ajax({
+    url: `/api/users/${id}`,
+    method: `PATCH`,
+    data: data,
+    headers: csrf_token,
+    contentType: false,
+    processData: false
+  })
+)
+
 export const fetchUsers = () => (
   $.ajax({
     method: `GET`,

@@ -40,3 +40,8 @@ export const updateUser = user => dispatch => (
   APIUtil.editUser(user).then(user => dispatch(receiveUser(user)),
     err => dispatch(receiveErrors(err.responseJSON)))
 );
+
+export const updateUserPicture = (id, data) => (dispatch) => (
+  APIUtil.editUserPicture(id, data).then(user => dispatch(receiveUser(user)),
+    err => dispatch(recieveErrors(err.responseJSON)))
+)

@@ -10,12 +10,15 @@ class UserProfile extends React.Component {
     // toggles whether the edit user info form is displayed
     // on child component
     this.state = {
-      editProfile: false
+      editProfile: false,
+      photoURL: null,
+      profilePictureFile: null
     }
 
     this.beginEdit = this.beginEdit.bind(this);
     this.endEdit = this.endEdit.bind(this);
     this.deletePost = this.deletePost.bind(this);
+    this.handleNewProfilePicture = this.handleNewProfilePicture.bind(this);
   }
 
   // fetch user when component mounts
@@ -31,6 +34,30 @@ class UserProfile extends React.Component {
       this.props.fetchUser(this.props.match.params.userId);
       this.props.clearErrors();
     }
+  }
+
+  handleNewProfilePicture(e){
+    e.preventDefault();
+    const file = e.currentTarget.files[0];
+
+    const fileReader = new FileReader();
+    fileReader.onloadend = () => {
+      this.setState({ profilePictureFile: file, photoURL: fileReader.result })
+    };
+
+    if (file) {
+      fileReader.readAsDataURL(file);
+    }
+
+    this.setState({ profilePictureFile: file }, () => {
+      const formData = new FormData();
+      formData.append(`user[profile_picture]`, this.state.profilePictureFile);
+      this.props.updateUserPicture(this.props.user.id, formData).then(() => 
+        this.props.fetchUser(this.props.match.params.userId));
+
+      
+      this.setState({ profilePictureFile: null, photoURL: null})
+    });
   }
 
   // initiates edit display
@@ -66,10 +93,21 @@ class UserProfile extends React.Component {
       )
     }
 
+    let updateProfilePicture = "";
+    if (this.props.user.id === this.props.currentUser.id || this.props.currentUser.admin_type){
+      updateProfilePicture = (
+        <div>
+          <input type="file" onChange={this.handleNewProfilePicture} />
+          <br />
+        </div>
+      )
+    }
+
     // this is the default display once the user is fetched, used for viewing and editting
     return (
       <div>
         <img src={this.props.user.profilePicture} ></img>
+        {updateProfilePicture}
         <UserInfo
           user={this.props.user}
           currentUser={this.props.currentUser}

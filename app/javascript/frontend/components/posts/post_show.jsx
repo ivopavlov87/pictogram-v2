@@ -61,10 +61,22 @@ function PostShow(props){
     )
   }
 
+  let postImages = <div></div>
+  if (props.post.photoURLs && props.post.photoURLs.length > 0){
+    postImages = (
+      <ul>
+        {props.post.photoURLs.map((photoURL, i) => (
+          <li key={`post-${props.post.id}-photo-${i}`}><img width="400px" height="auto" src={photoURL} ></img></li>
+        ))}
+      </ul>
+    )
+  }
+
   // default render => displayed post
   return (
     <div>
       {postOptions}
+      {postImages}
       Post author: {props.post.author.username}
       <br />
       Post location: {props.post.location}

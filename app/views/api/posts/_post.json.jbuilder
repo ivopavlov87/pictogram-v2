@@ -17,3 +17,7 @@ json.author do
     json.profilePicture image_url('default_user_photo.png')
   end
 end
+
+
+json.photoURLs post.photos.map { |file| url_for(file) }
+

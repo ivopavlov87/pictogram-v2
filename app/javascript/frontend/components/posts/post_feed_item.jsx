@@ -31,7 +31,6 @@ function PostFeedItem(props){
       <div>
         <button onClick={startEdit}>Edit Post</button>
         <button onClick={handleDelete}>Delete Post</button>
-        <br />
       </div>
     )
   }
@@ -52,18 +51,30 @@ function PostFeedItem(props){
 
   // ATTENTION - REMOVE FOR CSS STYLING LATER
   const authorPicture = (
-    <img height="auto" width="150px" src={props.post.author.profilePicture} ></img>
+    <div>
+      <img height="auto" width="150px" src={props.post.author.profilePicture} ></img> Post author: {postAuthor}
+    </div>
   )
+
+  let postImages = <div></div>
+  if (props.post.photoURLs && props.post.photoURLs.length > 0) {
+    postImages = (
+      <ul>
+        {props.post.photoURLs.map((photoURL, i) => (
+          <li key={`post-${props.post.id}-photo-${i}`}><img width="400px" height="auto" src={photoURL} ></img></li>
+        ))}
+      </ul>
+    )
+  }
 
   // default render => displayed post
   return (
     <div>
-      Post author: {postAuthor}
-      {postOptions}
       {authorPicture}
-      <br />
+      {postOptions}
       Post location: {props.post.location}
       <br />
+      {postImages}
       Post caption: {props.post.caption}
       <br />
       <br />

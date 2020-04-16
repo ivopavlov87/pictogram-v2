@@ -6,9 +6,11 @@ end
 
 json.posts @posts do |post|
   json.partial! 'api/posts/post', post: post
+  json.photoURLs post.photos.map { |file| url_for(file) }
+  # if post.photos.attached?
+  #   json.photoURLs @post.photos.map { |file| url_for(file) }
+  # end
 end
-
-# json.profilePicture image_url('default_user_photo.png')
 
 if user.profile_picture.attached?
   json.profilePicture url_for(user.profile_picture)

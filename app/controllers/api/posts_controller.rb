@@ -1,12 +1,12 @@
 class Api::PostsController < ApplicationController
 
   def index
-    @posts = Post.all
+    @posts = Post.all.with_attached_photos.includes(:user)
     render :index
   end
 
   def show
-    @post = Post.includes(:user).find(params[:id])
+    @post = Post.with_attached_photos.includes(:user).find(params[:id])
 
     if @post
       render :show
@@ -50,7 +50,7 @@ class Api::PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:caption, :location, :user_id)
+    params.require(:post).permit(:caption, :location, :user_id, photos: [])
   end
 
 end

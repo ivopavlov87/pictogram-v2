@@ -5,6 +5,7 @@ function PostForm(props){
 
   const [postCaption, setPostCaption] = useState(props.post ? props.post.caption : "")
   const [postLocation, setPostLocation] = useState(props.post ? props.post.location : "")
+  const [postPhotos, setPostPhotos] = useState([]);
 
   // error rendering component
   function RenderErrors(props){
@@ -38,10 +39,15 @@ function PostForm(props){
     e.preventDefault();
 
     if(!props.postEdit){
+
       const newPost = new FormData();
       newPost.append("post[caption]", postCaption);
       newPost.append("post[location]", postLocation);
       newPost.append("post[user_id]", props.currentUser.id);
+
+      for (let i = 0; i < postPhotos.length; i++) {
+        newPost.append("post[photos][]", postPhotos[i])
+      }
 
       props.createPost(newPost).then(response => {
         if (!response.errors){
@@ -65,6 +71,19 @@ function PostForm(props){
     }
   }
 
+  let photosOrInput = props.postEdit ?
+    <ul>
+      {props.post.photoURLs.map((photoURL, i) => (
+        <li key={`post-${props.post.id}-photo-${i}`}><img width="400px" height="auto" src={photoURL} ></img></li>
+      ))}
+    </ul> :
+    <input
+      type="file"
+      // value={postPhotos}
+      onChange={e => setPostPhotos(e.target.files)}
+      multiple
+    />
+
   // conditionally render what is on the submit button
   let submitButtonText = props.postEdit ? "Update Post" : "Create New Post";
 
@@ -72,6 +91,12 @@ function PostForm(props){
     <div>
       This is the Post Form
       <form onSubmit={handlePostSubmit}>
+        <label>
+          Post photos:
+          <br />
+          {photosOrInput}
+          <br />
+        </label>
         <label>
           Location:
           <br />

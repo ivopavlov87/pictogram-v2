@@ -20,7 +20,7 @@ function PostFeed(props){
   return (
     <div>
       <ul>
-        {Object.values(props.posts).map((post) => (
+        {Object.values(props.posts).sort((a, b) => b.id - a.id).map((post) => (
           <li key={`post-${post.id}`}>
             <PostFeedItem
               post={post}

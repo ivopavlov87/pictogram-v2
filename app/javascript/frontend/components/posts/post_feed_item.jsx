@@ -52,7 +52,7 @@ function PostFeedItem(props){
 
   // ATTENTION - REMOVE FOR CSS STYLING LATER
   const authorPicture = (
-    <img height="300px" width="300px" src={props.post.author.profilePicture} ></img>
+    <img height="auto" width="150px" src={props.post.author.profilePicture} ></img>
   )
 
   // default render => displayed post

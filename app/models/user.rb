@@ -34,7 +34,7 @@ class User < ApplicationRecord
 
   before_save :strip_email
 
-  has_one_attached :profile_picture
+  has_one_attached :profile_picture, dependent: :destroy
 
   has_many :posts, dependent: :destroy
 
@@ -68,8 +68,6 @@ class User < ApplicationRecord
   # hashes password upon creation and adds it to password_digest column
   def password=(password)
     @password = password
-    p "self - password"
-    p self
     self.password_digest = BCrypt::Password.create(password)
   end
 

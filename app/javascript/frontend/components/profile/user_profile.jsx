@@ -104,9 +104,10 @@ class UserProfile extends React.Component {
     }
 
     // this is the default display once the user is fetched, used for viewing and editting
+    // ATTENTION - change width/height for CSS styling
     return (
       <div>
-        <img src={this.props.user.profilePicture} ></img>
+        <img width="400px" height="auto" src={this.props.user.profilePicture} ></img>
         {updateProfilePicture}
         <UserInfo
           user={this.props.user}

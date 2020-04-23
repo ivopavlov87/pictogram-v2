@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { withRouter, Link } from 'react-router-dom';
 
+import Slider from "react-slick";
 import PostForm from './post_form_container';
 
 function PostFeedItem(props){
@@ -58,13 +59,25 @@ function PostFeedItem(props){
 
   let postImages = <div></div>
   if (props.post.photoURLs && props.post.photoURLs.length > 0) {
+
+    const imageSettings = {
+      dots: true,
+      infinite: true,
+      fade: true,
+      speed: 500,
+      slidesToShow: 1,
+      slidesToScroll: 1,
+    };
+
     postImages = (
-      <ul>
+      <Slider {...imageSettings}>
         {props.post.photoURLs.map((photoURL, i) => (
-          <li key={`post-${props.post.id}-photo-${i}`}><img width="400px" height="auto" src={photoURL} ></img></li>
+          <div key={`post-${props.post.id}-photo-${i}`}>
+            <img className="feed-item-img" src={photoURL}></img>
+          </div>
         ))}
-      </ul>
-    )
+      </Slider>
+    );
   }
 
   // default render => displayed post
@@ -74,7 +87,12 @@ function PostFeedItem(props){
       {postOptions}
       Post location: {props.post.location}
       <br />
-      {postImages}
+      <div className="post-img-slideshow-container">
+        {/* <Slider {...imageSettings}> */}
+          {/* <Slider> */}
+          {postImages}
+        {/* </Slider> */}
+      </div>
       Post caption: {props.post.caption}
       <br />
       <br />

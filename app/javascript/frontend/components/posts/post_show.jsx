@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { withRouter } from 'react-router-dom';
 
+import Slider from "react-slick";
 import PostForm from './post_form_container'
 
 function PostShow(props){
@@ -63,13 +64,27 @@ function PostShow(props){
 
   let postImages = <div></div>
   if (props.post.photoURLs && props.post.photoURLs.length > 0){
+
+    const imageSettings = {
+      dots: true,
+      infinite: true,
+      fade: true,
+      speed: 500,
+      slidesToShow: 1,
+      slidesToScroll: 1,
+    };
+
     postImages = (
-      <ul>
-        {props.post.photoURLs.map((photoURL, i) => (
-          <li key={`post-${props.post.id}-photo-${i}`}><img width="400px" height="auto" src={photoURL} ></img></li>
-        ))}
-      </ul>
-    )
+      <div className="post-img-slideshow-container">
+        <Slider {...imageSettings}>
+          {props.post.photoURLs.map((photoURL, i) => (
+            <li key={`post-${props.post.id}-photo-${i}`}>
+              <img width="400px" height="auto" src={photoURL}></img>
+            </li>
+          ))}
+        </Slider>
+      </div>
+    );
   }
 
   // default render => displayed post

@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { withRouter } from 'react-router-dom';
 
+import Slider from "react-slick";
+
 function PostForm(props){
 
   const [postCaption, setPostCaption] = useState(props.post ? props.post.caption : "")
@@ -71,18 +73,40 @@ function PostForm(props){
     }
   }
 
-  let photosOrInput = props.postEdit ?
-    <ul>
-      {props.post.photoURLs.map((photoURL, i) => (
-        <li key={`post-${props.post.id}-photo-${i}`}><img width="400px" height="auto" src={photoURL} ></img></li>
-      ))}
-    </ul> :
+  const imageSettings = {
+    dots: true,
+    infinite: true,
+    fade: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+  };
+
+  let photosOrInput = props.postEdit ? (
+    photosOrInput = (
+      <div className="post-img-slideshow-container">
+        <Slider {...imageSettings}>
+          {props.post.photoURLs.map((photoURL, i) => (
+            <div key={`post-${props.post.id}-photo-${i}`}>
+              <img
+                className="feed-item-img"
+                width="400px"
+                height="auto"
+                src={photoURL}
+              ></img>
+            </div>
+          ))}
+        </Slider>
+      </div>
+    )
+  ) : (
     <input
       type="file"
       // value={postPhotos}
-      onChange={e => setPostPhotos(e.target.files)}
+      onChange={(e) => setPostPhotos(e.target.files)}
       multiple
     />
+  );
 
   // conditionally render what is on the submit button
   let submitButtonText = props.postEdit ? "Update Post" : "Create New Post";

@@ -73,6 +73,7 @@ function PostForm(props){
     }
   }
 
+  // settings for slider
   const imageSettings = {
     dots: true,
     infinite: true,

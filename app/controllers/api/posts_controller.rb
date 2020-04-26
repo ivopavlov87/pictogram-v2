@@ -41,7 +41,8 @@ class Api::PostsController < ApplicationController
     if @post && (@post.user_id == current_user.id || current_user.admin_type)
       @post.destroy
       # attention:
-      # render :index
+      # done?
+      render :index
     else
       render json: @post.errors.full_messages, status: 404
     end

@@ -19,17 +19,15 @@ function PostFeed(props){
 
   return (
     <div>
-      <ul>
-        {Object.values(props.posts).sort((a, b) => b.id - a.id).map((post) => (
-          <li key={`post-${post.id}`}>
-            <PostFeedItem
-              post={post}
-              currentUser={props.currentUser}
-              deletePost={props.deletePost}
-            />
-          </li>
-        ))}
-      </ul>
+      {Object.values(props.posts).sort((a, b) => b.id - a.id).map((post) => (
+        <div key={`post-${post.id}`}>
+          <PostFeedItem
+            post={post}
+            currentUser={props.currentUser}
+            deletePost={props.deletePost}
+          />
+        </div>
+      ))}
     </div>
   );
 }

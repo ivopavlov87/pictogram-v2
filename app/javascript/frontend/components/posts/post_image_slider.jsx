@@ -1,11 +1,18 @@
 import React from 'react';
 import Slider from 'react-slick';
 
+import "./post_image_slider.css"
+
 function PostImageSlider(props){
 
   // settings for slider
   const imageSettings = {
     dots: true,
+    appendDots: dots => (
+        <div>
+          <ul style={{ margin: "50px" }}> {dots} </ul>
+        </div>
+      ),
     infinite: true,
     fade: true,
     speed: 500,
@@ -14,6 +21,7 @@ function PostImageSlider(props){
   };
 
   // ATTENTION - REMOVE "height/width" FOR CSS STYLING LATER
+  // done?
   return (
     <div className="post-img-slideshow-container">
       <Slider {...imageSettings}>
@@ -21,8 +29,6 @@ function PostImageSlider(props){
           <div key={`post-${props.post.id}-photo-${i}`}>
             <img
               className="feed-item-img"
-              width="400px"
-              height="auto"
               src={photoURL}
             ></img>
           </div>

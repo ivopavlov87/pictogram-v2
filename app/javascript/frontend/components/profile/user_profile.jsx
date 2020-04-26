@@ -122,18 +122,16 @@ class UserProfile extends React.Component {
         />
         <br />
         {this.props.user.username}'s posts:
-        <ul>
           {Object.values(this.props.user.posts).sort((a, b) => b.id - a.id).map((post) => (
-            <li key={`post-${post.id}`}>
+            <div key={`post-${post.id}`}>
               <PostFeedItem
                 post={post}
                 currentUser={this.props.currentUser}
                 user={this.props.user}
                 deletePost={this.deletePost}
               />
-            </li>
+            </div>
           ))}
-        </ul>
       </div>
     );
   }

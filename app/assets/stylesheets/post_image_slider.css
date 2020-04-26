@@ -53,7 +53,7 @@
 
 
 .slick-arrow.slick-prev:after {
-	content: url('../../../../assets/images/icons8-back-arrow-30.png');
+	content: url('icons8-back-arrow-30.png');
 	visibility: visible;
 	display: block;
 
@@ -75,7 +75,7 @@
 }
 
 .slick-arrow.slick-next:after {
-	content: url('../../../../assets/images/icons8-forward-button-30.png'); 
+	content: url('icons8-forward-button-30.png'); 
 	visibility: visible;
 	display: block;
 

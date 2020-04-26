@@ -1,7 +1,7 @@
 import React from 'react';
 import Slider from 'react-slick';
 
-import "./post_image_slider.css"
+// import "./post_image_slider.css"
 
 function PostImageSlider(props){
 

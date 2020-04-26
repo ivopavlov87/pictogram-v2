@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { withRouter, Link } from 'react-router-dom';
 
-import Slider from "react-slick";
+import PostImageSlider from "./post_image_slider";
 import PostForm from './post_form_container';
+import PostAuthorInfo from './post_author_info';
 
 function PostFeedItem(props){
 
@@ -27,7 +28,7 @@ function PostFeedItem(props){
       setPostEdit(true);
     }
     
-    // change what postOptions returns if user is post author or admin
+    // enable postOptions if user is post author or admin
     postOptions = (
       <div>
         <button onClick={startEdit}>Edit Post</button>
@@ -46,53 +47,19 @@ function PostFeedItem(props){
     )
   }
 
-  const postAuthor = (
-    <Link to={`users/${props.post.user_id}`}>{props.post.author.username}</Link>
-  )
-
-  // ATTENTION - REMOVE FOR CSS STYLING LATER
-  const authorPicture = (
-    <div>
-      <img height="auto" width="150px" src={props.post.author.profilePicture} ></img> Post author: {postAuthor}
-    </div>
-  )
-
   let postImages = <div></div>
   if (props.post.photoURLs && props.post.photoURLs.length > 0) {
-
-    const imageSettings = {
-      dots: true,
-      infinite: true,
-      fade: true,
-      speed: 500,
-      slidesToShow: 1,
-      slidesToScroll: 1,
-    };
-
-    postImages = (
-      <Slider {...imageSettings}>
-        {props.post.photoURLs.map((photoURL, i) => (
-          <div key={`post-${props.post.id}-photo-${i}`}>
-            <img className="feed-item-img" src={photoURL}></img>
-          </div>
-        ))}
-      </Slider>
-    );
+    postImages = <PostImageSlider post={props.post} />
   }
 
   // default render => displayed post
   return (
     <div>
-      {authorPicture}
+      <PostAuthorInfo author={props.post.author} />
       {postOptions}
       Post location: {props.post.location}
       <br />
-      <div className="post-img-slideshow-container">
-        {/* <Slider {...imageSettings}> */}
-          {/* <Slider> */}
-          {postImages}
-        {/* </Slider> */}
-      </div>
+      {postImages}
       Post caption: {props.post.caption}
       <br />
       <br />

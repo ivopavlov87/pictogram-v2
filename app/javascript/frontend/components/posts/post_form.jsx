@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 
-import Slider from "react-slick";
+import PostImageSlider from "./post_image_slider";
+import PostAuthorInfo from "./post_author_info";
+// import Slider from "react-slick";
 
 function PostForm(props){
 
@@ -73,37 +75,13 @@ function PostForm(props){
     }
   }
 
-  // settings for slider
-  const imageSettings = {
-    dots: true,
-    infinite: true,
-    fade: true,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-  };
-
+  // conditionally render input for new photos, OR photos for post being updated
+  // based on whether user is updating a post, or creating a new one
   let photosOrInput = props.postEdit ? (
-    photosOrInput = (
-      <div className="post-img-slideshow-container">
-        <Slider {...imageSettings}>
-          {props.post.photoURLs.map((photoURL, i) => (
-            <div key={`post-${props.post.id}-photo-${i}`}>
-              <img
-                className="feed-item-img"
-                width="400px"
-                height="auto"
-                src={photoURL}
-              ></img>
-            </div>
-          ))}
-        </Slider>
-      </div>
-    )
+    photosOrInput = <PostImageSlider post={props.post} />
   ) : (
     <input
       type="file"
-      // value={postPhotos}
       onChange={(e) => setPostPhotos(e.target.files)}
       multiple
     />
@@ -115,6 +93,7 @@ function PostForm(props){
   return (
     <div>
       This is the Post Form
+      <PostAuthorInfo author={props.post.author} />
       <form onSubmit={handlePostSubmit}>
         <label>
           Post photos:
@@ -155,7 +134,7 @@ function PostForm(props){
       </form>
       <RenderErrors errors={props.errors} />
     </div>
-  )
+  );
 
 }
 

@@ -8,14 +8,10 @@ function PostImageSlider(props){
   // settings for slider
   const imageSettings = {
     dots: true,
-    appendDots: dots => (
-        <div>
-          <ul style={{ margin: "50px" }}> {dots} </ul>
-        </div>
-      ),
     infinite: true,
     fade: true,
     speed: 500,
+    // adaptiveHeight: true,
     slidesToShow: 1,
     slidesToScroll: 1,
   };
@@ -26,7 +22,7 @@ function PostImageSlider(props){
     <div className="post-img-slideshow-container">
       <Slider {...imageSettings}>
         {props.post.photoURLs.map((photoURL, i) => (
-          <div key={`post-${props.post.id}-photo-${i}`}>
+          <div className="feed-item-img-container" key={`post-${props.post.id}-photo-${i}`}>
             <img
               className="feed-item-img"
               src={photoURL}

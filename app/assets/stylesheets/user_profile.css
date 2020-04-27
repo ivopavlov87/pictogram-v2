@@ -1,0 +1,13 @@
+.user-profile {
+  width: 614px;
+  margin: auto;
+}
+
+.user-profile-picture {
+  height: 150px;
+  width: 150px;
+  object-fit: cover;
+  border-radius: 100px;
+  object-position: 100% 0;
+  margin-left: 5px;
+}

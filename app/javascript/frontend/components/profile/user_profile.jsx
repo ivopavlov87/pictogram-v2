@@ -105,33 +105,41 @@ class UserProfile extends React.Component {
 
     // this is the default display once the user is fetched, used for viewing and editting
     // ATTENTION - change width/height for CSS styling
+    // done?
     return (
-      <div>
-        <img width="400px" height="auto" src={this.props.user.profilePicture} ></img>
-        {updateProfilePicture}
-        <UserInfo
-          user={this.props.user}
-          currentUser={this.props.currentUser}
-          updateUser={this.props.updateUser}
-          errors={this.props.errors}
-          beginEdit={this.beginEdit}
-          endEdit={this.endEdit}
-          updateUser={this.props.updateUser}
-          clearErrors={this.props.clearErrors}
-          editState={this.state.editProfile}
-        />
-        <br />
-        {this.props.user.username}'s posts:
-          {Object.values(this.props.user.posts).sort((a, b) => b.id - a.id).map((post) => (
-            <div key={`post-${post.id}`}>
-              <PostFeedItem
-                post={post}
-                currentUser={this.props.currentUser}
-                user={this.props.user}
-                deletePost={this.deletePost}
-              />
-            </div>
-          ))}
+      <div className="user-profile-container">
+        <div className="user-profile">
+          <img
+            className="user-profile-picture"
+            src={this.props.user.profilePicture}
+          ></img>
+          {updateProfilePicture}
+          <UserInfo
+            user={this.props.user}
+            currentUser={this.props.currentUser}
+            updateUser={this.props.updateUser}
+            errors={this.props.errors}
+            beginEdit={this.beginEdit}
+            endEdit={this.endEdit}
+            updateUser={this.props.updateUser}
+            clearErrors={this.props.clearErrors}
+            editState={this.state.editProfile}
+          />
+          <br />
+          {this.props.user.username}'s posts:
+          {Object.values(this.props.user.posts)
+            .sort((a, b) => b.id - a.id)
+            .map((post) => (
+              <div key={`post-${post.id}`}>
+                <PostFeedItem
+                  post={post}
+                  currentUser={this.props.currentUser}
+                  user={this.props.user}
+                  deletePost={this.deletePost}
+                />
+              </div>
+            ))}
+        </div>
       </div>
     );
   }

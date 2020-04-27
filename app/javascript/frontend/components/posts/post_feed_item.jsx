@@ -54,7 +54,7 @@ function PostFeedItem(props){
 
   // default render => displayed post
   return (
-    <div>
+    <div className="feed-item">
       <PostAuthorInfo author={props.post.author} />
       {postOptions}
       Post location: {props.post.location}

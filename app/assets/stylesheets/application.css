@@ -14,7 +14,10 @@
  *= require_self
  */
 
-/* @import "./post_image_slider.css" */
+body{
+  background-color: #fafafa;
+  font-family: sans-serif;
+}
 
 /* .post-img-slideshow-container {
   width: 400px;

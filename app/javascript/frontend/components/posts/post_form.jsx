@@ -90,10 +90,15 @@ function PostForm(props){
   // conditionally render what is on the submit button
   let submitButtonText = props.postEdit ? "Update Post" : "Create New Post";
 
+  let postAuthor = ""
+  if(props.post){
+    postAuthor = <PostAuthorInfo author={props.post.author} />;
+  }
+
   return (
     <div>
       This is the Post Form
-      <PostAuthorInfo author={props.post.author} />
+      {postAuthor}
       <form onSubmit={handlePostSubmit}>
         <label>
           Post photos:

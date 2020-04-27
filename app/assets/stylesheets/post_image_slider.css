@@ -1,13 +1,30 @@
 
+.slick-dots{
+	margin: 50px;
+}
 
-.post-img-slideshow-container {
-  width: 400px;
-  margin: 0px 0px 0px 0px;
+/* .post-img-slideshow-container {
+	border: 1px solid purple;
+	margin: auto;
+} */
+
+.feed-item-img-container {
+	height: auto;
+}
+
+.feed-item{
+	width: 614px;
+	margin: auto;
+	/* border: 1px solid red; */
 }
 
 .feed-item-img {
-  width: 100%;
-  height: auto;
+  max-width: 614px;
+  max-height: 614px;
+  object-fit: scale-down;
+  display: flex;
+	margin: 0 auto;
+	/* border: 1px solid green; */
 }
 
 .slick-prev {

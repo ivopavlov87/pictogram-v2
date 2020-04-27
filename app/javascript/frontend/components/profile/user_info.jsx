@@ -122,7 +122,7 @@ function UserInfo(props) {
   let editLink = "";
 
   // show edit button if logged in user is owner of page, OR if user is an admin
-  if (props.user.id === props.currentUser.id || props.currentUser.admin_type) {
+  if (props.currentUser.username != "demoUser" && (props.user.id === props.currentUser.id || props.currentUser.admin_type)) {
     editLink = (
       <div>
         <button onClick={props.beginEdit}>Edit Profile</button>

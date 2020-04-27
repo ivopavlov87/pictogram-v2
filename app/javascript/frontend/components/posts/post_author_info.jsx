@@ -13,7 +13,7 @@ function PostAuthorInfo(props){
           src={props.author.profilePicture}
         ></img>{" "}
         Post author:{" "}
-        <Link to={`users/${props.user_id}`}>{props.author.username}</Link>
+        <Link to={`users/${props.author.id}`}>{props.author.username}</Link>
       </div>
     </div>
   );

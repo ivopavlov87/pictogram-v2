@@ -11,6 +11,7 @@ json.extract! post, :id, :caption, :location, :user_id, :updated_at, :created_at
 json.author do
   json.id post.user.id
   json.username post.user.username
+  json.name post.user.name
   if post.user.profile_picture.attached?
     json.profilePicture url_for(post.user.profile_picture)
   else
@@ -18,6 +19,8 @@ json.author do
   end
 end
 
-
 json.photoURLs post.photos.map { |file| url_for(file) }
 
+json.comments @comments do |comment|
+  json.partial! 'api/comments/comment', comment: comment
+end

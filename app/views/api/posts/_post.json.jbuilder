@@ -21,6 +21,6 @@ end
 
 json.photoURLs post.photos.map { |file| url_for(file) }
 
-json.comments @comments do |comment|
+json.comments post.comments do |comment|
   json.partial! 'api/comments/comment', comment: comment
 end

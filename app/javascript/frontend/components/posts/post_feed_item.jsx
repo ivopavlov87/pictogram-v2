@@ -5,6 +5,9 @@ import PostImageSlider from "./post_image_slider";
 import PostForm from './post_form_container';
 import PostAuthorInfo from './post_author_info';
 
+import CommentItem from "./comments/comment_item";
+import CommentForm from "./comments/comment_form_container";
+
 function PostFeedItem(props){
 
   const [postEdit, setPostEdit] = useState(false);
@@ -52,6 +55,21 @@ function PostFeedItem(props){
     postImages = <PostImageSlider post={props.post} />
   }
 
+  let postComments = <div></div>
+  if (props.post.comments && props.post.comments.length > 0) {
+    postComments = (
+      <div>
+        Post comments:
+        <br />
+        {props.post.comments.map(comment => (
+        <div key={`post-${comment.post_id}-comment-${comment.id}`}>
+          <CommentItem comment={comment} />
+        </div>
+        ))}
+      </div>
+    );
+  }
+
   // default render => displayed post
   return (
     <div className="feed-item">
@@ -62,7 +80,8 @@ function PostFeedItem(props){
       {postImages}
       Post caption: {props.post.caption}
       <br />
-      <br />
+      {postComments}
+      <CommentForm />
     </div>
   );
 }

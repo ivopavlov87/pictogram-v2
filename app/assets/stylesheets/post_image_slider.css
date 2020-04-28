@@ -12,11 +12,10 @@
 	height: auto;
 }
 
-.feed-item{
+/* .feed-item{
 	width: 614px;
 	margin: auto;
-	/* border: 1px solid red; */
-}
+} */
 
 .feed-item-img {
   max-width: 614px;

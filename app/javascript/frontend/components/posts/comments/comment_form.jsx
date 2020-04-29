@@ -15,15 +15,10 @@ function CommentForm(props){
       newComment.append("comment[user_id]", props.currentUser.id);
       newComment.append("comment[post_id]", props.postId);
 
-      console.log("commentBody", commentBody);
-      console.log("comment[user_id]", props.currentUser.id);
-      console.log("comment[post_id]", props.postId);
-
       props.createComment(newComment).then(response => {
-        console.log("response", response)
         if (!response.errors){
           props.clearErrors();
-          props.fetchPost(props.postId);
+          props.refetch();
           setCommentBody("");
         }
       })
@@ -40,8 +35,6 @@ function CommentForm(props){
       </ul>
     );
   }
-
-  console.log("props from comment form", props)
 
   return (
     <div>

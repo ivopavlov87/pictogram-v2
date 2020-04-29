@@ -86,7 +86,7 @@ function PostFeedItem(props){
       Post caption: {props.post.caption}
       <br />
       {postComments}
-      <CommentForm postId={props.post.id} fetchPost={props.fetchPost} />
+      <CommentForm postId={props.post.id} refetch={props.refetch} />
     </div>
   );
 }

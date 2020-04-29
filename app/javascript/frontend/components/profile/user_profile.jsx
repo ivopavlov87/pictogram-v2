@@ -20,7 +20,6 @@ class UserProfile extends React.Component {
     this.deletePost = this.deletePost.bind(this);
     this.handleNewProfilePicture = this.handleNewProfilePicture.bind(this);
     this.refetchUser = this.refetchUser.bind(this);
-    // this.deletePostComment = this.deletePostComment.bind(this);
   }
 
   // fetch user when component mounts
@@ -41,10 +40,6 @@ class UserProfile extends React.Component {
   refetchUser(){
     this.props.fetchUser(this.props.match.params.userId);
   }
-
-  // deletePostComment(comment){
-  //   this.props.deleteComment(comment).then(() => this.props.fetchUser(this.props.match.params.userId))
-  // }
 
   handleNewProfilePicture(e){
     e.preventDefault();
@@ -145,7 +140,6 @@ class UserProfile extends React.Component {
                   post={post}
                   currentUser={this.props.currentUser}
                   user={this.props.user}
-                  fetchPost={this.refetchUser}
                   refetch={this.refetchUser}
                   deletePost={this.deletePost}
                   deleteComment={this.props.deleteComment}

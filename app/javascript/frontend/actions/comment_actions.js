@@ -26,16 +26,16 @@ export const clearErrors = () => ({
 });
 
 export const createComment = comment => dispatch => (
-  APIUtil.createComment(comment).then(comment => dispatch(receiveComment(comment))),
-    err => dispatch(receiveErrors(err.responseJSON))
+  APIUtil.createComment(comment).then(comment => dispatch(receiveComment(comment)),
+    err => dispatch(receiveErrors(err.responseJSON)))
 );
 
 export const updateComment = comment => dispatch => (
-  APIUtil.updateComment(comment).then(comment => dispatch(receiveComment(comment))),
-    err => dispatch(recieveErrors(err.responseJSON))
+  APIUtil.updateComment(comment).then(comment => dispatch(receiveComment(comment)),
+    err => dispatch(recieveErrors(err.responseJSON)))
 );
 
 export const deleteComment = comment => dispatch => (
-  APIUtil.deleteComment(comment.id).then(() => dispatch(removeComment(comment.id)))
+  APIUtil.deleteComment(comment).then(() => dispatch(removeComment(comment.id)))
     .catch(err => console.log(err))
 );

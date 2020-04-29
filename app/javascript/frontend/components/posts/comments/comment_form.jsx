@@ -3,7 +3,32 @@ import { withRouter } from "react-router-dom";
 
 function CommentForm(props){
 
-  const [commentBody, setCommentBody] = useState(props.comment ? props.comment.body : "")
+  const [commentBody, setCommentBody] = useState(props.comment ? props.comment.body : "");
+
+  function handleCommentSubmit(e) {
+    e.preventDefault();
+
+    if (!props.commentEdit){
+
+      const newComment = new FormData();
+      newComment.append("comment[body]", commentBody);
+      newComment.append("comment[user_id]", props.currentUser.id);
+      newComment.append("comment[post_id]", props.postId);
+
+      console.log("commentBody", commentBody);
+      console.log("comment[user_id]", props.currentUser.id);
+      console.log("comment[post_id]", props.postId);
+
+      props.createComment(newComment).then(response => {
+        console.log("response", response)
+        if (!response.errors){
+          props.clearErrors();
+          props.fetchPost(props.postId);
+          setCommentBody("");
+        }
+      })
+    }
+  }
 
   // error rendering component
   function RenderErrors(props){
@@ -16,12 +41,27 @@ function CommentForm(props){
     );
   }
 
+  console.log("props from comment form", props)
+
   return (
     <div>
       This is the comment form.
+      <div className="comment-create-container">
+        <form className="comment-create-form" onSubmit={handleCommentSubmit}>
+          <textarea className="comment-create-textarea"
+            value={commentBody}
+            rows="5"
+            cols="55"
+            maxLength="255"
+            placeholder="Leave a comment"
+            onChange={(e) => setCommentBody(e.target.value)}
+          ></textarea>
+          <input type="submit" value="Submit Comment" />
+        </form>
+      </div>
       <RenderErrors errors={props.errors} />
     </div>
-  )
+  );
 }
 
 export default withRouter(CommentForm);

@@ -35,7 +35,7 @@ class Api::CommentsController < ApplicationController
 
     if @comment && (@comment.user_id == current_user.id || current_user.admin_type)
       @comment.destroy
-      render :index
+      render json: ["Comment deleted"]
     else
       render json: @comment.errors.full_messages, status: 404
     end
@@ -44,6 +44,8 @@ class Api::CommentsController < ApplicationController
   private
 
   def comment_params
+    p "params"
+    p params
     params.require(:comment).permit(:body, :user_id, :post_id)
   end
 

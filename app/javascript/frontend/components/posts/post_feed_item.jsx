@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { withRouter, Link } from 'react-router-dom';
 
 import PostImageSlider from "./post_image_slider";
@@ -61,9 +61,14 @@ function PostFeedItem(props){
       <div>
         Post comments:
         <br />
-        {props.post.comments.map(comment => (
+        {props.post.comments.sort((a, b) => a.id - b.id).map(comment => (
         <div key={`post-${comment.post_id}-comment-${comment.id}`}>
-          <CommentItem comment={comment} />
+          <CommentItem 
+            comment={comment}
+            currentUser={props.currentUser}
+            deleteComment={props.deleteComment}
+            refetch={props.refetch}
+          />
         </div>
         ))}
       </div>
@@ -81,7 +86,7 @@ function PostFeedItem(props){
       Post caption: {props.post.caption}
       <br />
       {postComments}
-      <CommentForm />
+      <CommentForm postId={props.post.id} fetchPost={props.fetchPost} />
     </div>
   );
 }

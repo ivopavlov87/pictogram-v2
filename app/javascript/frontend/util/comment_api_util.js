@@ -4,6 +4,7 @@ export const createComment = comment => (
   $.ajax({
     method: `POST`,
     url: `/api/posts/${comment.post_id}/comments`,
+    data: comment,
     headers: csrf_token,
     processData: false,
     contentType: false,

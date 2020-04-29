@@ -2,6 +2,22 @@ import React from 'react';
 
 function CommentItem(props){
 
+  let commentOptions = <div></div>
+  if (props.comment.author.id === props.currentUser.id || props.currentUser.admin_type){
+
+    function handleDelete(e){
+      e.preventDefault();
+
+      props.deleteComment(props.comment).then(() => props.refetch())
+    }
+
+    commentOptions = (
+      <div>
+        <button onClick={handleDelete}>Delete Comment</button>
+      </div>
+    )
+  }
+
   return (
     <div className="comment-show-container">
       <img
@@ -11,6 +27,7 @@ function CommentItem(props){
       <div className="comment-user-and-body-container">
         {props.comment.author.username}: {props.comment.body}
       </div>
+      {commentOptions}
     </div>
   );
 }

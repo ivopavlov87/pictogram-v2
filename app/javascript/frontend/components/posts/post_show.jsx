@@ -5,6 +5,9 @@ import PostImageSlider from "./post_image_slider";
 import PostForm from './post_form_container';
 import PostAuthorInfo from "./post_author_info";
 
+import CommentItem from "./comments/comment_item";
+import CommentForm from "./comments/comment_form_container";
+
 function PostShow(props){
 
   const [postEdit, setPostEdit] = useState(false);
@@ -63,9 +66,34 @@ function PostShow(props){
     )
   }
 
+  // used to refresh list of comments on deleteComment
+  function refetchPost(){
+    props.fetchPost(props.post.id)
+  }
+
   let postImages = <div></div>
   if (props.post.photoURLs && props.post.photoURLs.length > 0){
     postImages = <PostImageSlider post={props.post} />
+  }
+
+  let postComments = <div></div>;
+  if (props.post.comments && props.post.comments.length > 0) {
+    postComments = (
+      <div>
+        Post comments:
+        <br />
+        {props.post.comments.sort((a, b) => a.id - b.id).map((comment) => (
+          <div key={`post-${comment.post_id}-comment-${comment.id}`}>
+            <CommentItem
+              comment={comment}
+              currentUser={props.currentUser}
+              deleteComment={props.deleteComment}
+              refetch={refetchPost}
+            />
+          </div>
+        ))}
+      </div>
+    );
   }
 
   // default render => displayed post
@@ -78,6 +106,8 @@ function PostShow(props){
       Post location: {props.post.location}
       <br />
       Post caption: {props.post.caption}
+      {postComments}
+      <CommentForm postId={props.post.id} fetchPost={props.fetchPost} />
     </div>
   );
 }

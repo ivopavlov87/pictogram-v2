@@ -25,6 +25,9 @@ function PostFeed(props){
             post={post}
             currentUser={props.currentUser}
             deletePost={props.deletePost}
+            fetchPost={props.fetchPost}
+            refetch={props.fetchPosts}
+            deleteComment={props.deleteComment}
           />
         </div>
       ))}

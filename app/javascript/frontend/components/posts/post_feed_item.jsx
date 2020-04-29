@@ -1,9 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { withRouter, Link } from 'react-router-dom';
 
 import PostImageSlider from "./post_image_slider";
 import PostForm from './post_form_container';
 import PostAuthorInfo from './post_author_info';
+
+import CommentItem from "./comments/comment_item";
+import CommentForm from "./comments/comment_form_container";
 
 function PostFeedItem(props){
 
@@ -52,6 +55,26 @@ function PostFeedItem(props){
     postImages = <PostImageSlider post={props.post} />
   }
 
+  let postComments = <div></div>
+  if (props.post.comments && props.post.comments.length > 0) {
+    postComments = (
+      <div>
+        Post comments:
+        <br />
+        {props.post.comments.sort((a, b) => a.id - b.id).map(comment => (
+        <div key={`post-${comment.post_id}-comment-${comment.id}`}>
+          <CommentItem 
+            comment={comment}
+            currentUser={props.currentUser}
+            deleteComment={props.deleteComment}
+            refetch={props.refetch}
+          />
+        </div>
+        ))}
+      </div>
+    );
+  }
+
   // default render => displayed post
   return (
     <div className="feed-item">
@@ -62,7 +85,8 @@ function PostFeedItem(props){
       {postImages}
       Post caption: {props.post.caption}
       <br />
-      <br />
+      {postComments}
+      <CommentForm postId={props.post.id} fetchPost={props.fetchPost} />
     </div>
   );
 }

@@ -1,12 +1,12 @@
 class Api::PostsController < ApplicationController
 
   def index
-    @posts = Post.all.with_attached_photos.includes(:user)
+    @posts = Post.all.with_attached_photos.includes(:user, :comments)
     render :index
   end
 
   def show
-    @post = Post.with_attached_photos.includes(:user).find(params[:id])
+    @post = Post.with_attached_photos.includes(:user, :comments).find(params[:id])
 
     if @post
       render :show

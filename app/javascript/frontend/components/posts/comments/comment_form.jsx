@@ -41,7 +41,8 @@ function CommentForm(props){
       This is the comment form.
       <div className="comment-create-container">
         <form className="comment-create-form" onSubmit={handleCommentSubmit}>
-          <textarea className="comment-create-textarea"
+          <textarea
+            className="comment-create-textarea"
             value={commentBody}
             rows="5"
             cols="55"
@@ -49,6 +50,7 @@ function CommentForm(props){
             placeholder="Leave a comment"
             onChange={(e) => setCommentBody(e.target.value)}
           ></textarea>
+          <div>{commentBody.length}/255 characters</div>
           <input type="submit" value="Submit Comment" />
         </form>
       </div>

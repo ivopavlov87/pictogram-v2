@@ -38,7 +38,6 @@ function CommentForm(props){
 
   return (
     <div>
-      This is the comment form.
       <div className="comment-create-container">
         <form className="comment-create-form" onSubmit={handleCommentSubmit}>
           <textarea

@@ -59,8 +59,6 @@ function PostFeedItem(props){
   if (props.post.comments && props.post.comments.length > 0) {
     postComments = (
       <div>
-        Post comments:
-        <br />
         {props.post.comments.sort((a, b) => a.id - b.id).map(comment => (
         <div key={`post-${comment.post_id}-comment-${comment.id}`}>
           <CommentItem 
@@ -78,12 +76,12 @@ function PostFeedItem(props){
   // default render => displayed post
   return (
     <div className="feed-item">
-      <PostAuthorInfo author={props.post.author} />
-      {postOptions}
-      Post location: {props.post.location}
-      <br />
+      <div className="author-and-options">
+        <PostAuthorInfo post={props.post} />
+        {postOptions}
+      </div>
       {postImages}
-      Post caption: {props.post.caption}
+      {props.post.author.username}: {props.post.caption}
       <br />
       {postComments}
       <CommentForm postId={props.post.id} refetch={props.refetch} />

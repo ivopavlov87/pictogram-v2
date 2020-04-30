@@ -8,12 +8,19 @@ function PostAuthorInfo(props){
   return (
     <div className="post-author-info-container">
       <div className="post-author-info">
-        <img
-          className="post-author-picture"
-          src={props.author.profilePicture}
-        ></img>{" "}
-        Post author:{" "}
-        <Link to={`/users/${props.author.id}`}>{props.author.username}</Link>
+        <div>
+          <img
+            className="post-author-picture"
+            src={props.post.author.profilePicture}
+          ></img>{" "}
+        </div>
+        <div className="author-and-location">
+          <Link to={`/users/${props.post.author.id}`}>
+            {props.post.author.username}
+          </Link>
+          <br />
+          {props.post.location}
+        </div>
       </div>
     </div>
   );

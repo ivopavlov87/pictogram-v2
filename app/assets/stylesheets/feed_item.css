@@ -4,6 +4,22 @@
   margin: 0px auto 5px auto;
 }
 
+.author-and-options {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.post-author-info {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.author-and-location {
+  margin-left: 15px;
+}
+
 .post-author-picture {
   height: 42px;
   width: 42px;

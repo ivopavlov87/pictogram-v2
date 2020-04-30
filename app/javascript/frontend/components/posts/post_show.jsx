@@ -99,7 +99,7 @@ function PostShow(props){
   // default render => displayed post
   return (
     <div>
-      <PostAuthorInfo author={props.post.author} />
+      <PostAuthorInfo post={props.post} />
       {postOptions}
       {postImages}
       <br />

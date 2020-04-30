@@ -92,7 +92,7 @@ function PostForm(props){
 
   let postAuthor = ""
   if(props.post){
-    postAuthor = <PostAuthorInfo author={props.post.author} />;
+    postAuthor = <PostAuthorInfo post={props.post} />;
   }
 
   return (

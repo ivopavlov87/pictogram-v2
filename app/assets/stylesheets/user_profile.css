@@ -3,6 +3,28 @@
   margin: auto;
 }
 
+.user-info-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.user-info {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.user-edit-info {
+  display: flex;
+  flex-direction: row;
+  box-sizing: content-box;
+}
+
+.user-text-container{
+  width: 100%;
+}
+
 .user-profile-picture {
   height: 150px;
   width: 150px;
@@ -10,4 +32,8 @@
   border-radius: 100px;
   object-position: 100% 0;
   margin-left: 5px;
+}
+
+.user-name {
+  color: grey
 }

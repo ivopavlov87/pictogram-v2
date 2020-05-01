@@ -114,22 +114,23 @@ class UserProfile extends React.Component {
     return (
       <div className="user-profile-container">
         <div className="user-profile">
-          <img
-            className="user-profile-picture"
-            src={this.props.user.profilePicture}
-          ></img>
-          {updateProfilePicture}
-          <UserInfo
-            user={this.props.user}
-            currentUser={this.props.currentUser}
-            updateUser={this.props.updateUser}
-            errors={this.props.errors}
-            beginEdit={this.beginEdit}
-            endEdit={this.endEdit}
-            updateUser={this.props.updateUser}
-            clearErrors={this.props.clearErrors}
-            editState={this.state.editProfile}
-          />
+          <div className="user-info-container">
+            <div className="user-profile-picture-container">
+              <img className="user-profile-picture" src={this.props.user.profilePicture}></img>
+              {updateProfilePicture}
+            </div>
+            <UserInfo
+              user={this.props.user}
+              currentUser={this.props.currentUser}
+              updateUser={this.props.updateUser}
+              errors={this.props.errors}
+              beginEdit={this.beginEdit}
+              endEdit={this.endEdit}
+              updateUser={this.props.updateUser}
+              clearErrors={this.props.clearErrors}
+              editState={this.state.editProfile}
+            />
+          </div>
           <br />
           {Object.values(this.props.user.posts)
             .sort((a, b) => b.id - a.id)

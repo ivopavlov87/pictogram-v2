@@ -18,6 +18,8 @@ function PostFeedItem(props){
 
   // unless user is post author or an admin, return empty div
   let postOptions = <div></div>
+  let postEditBtn = <div></div>
+  let postDeleteBtn = <div></div>
   if(props.post.user_id == props.currentUser.id || props.currentUser.admin_type) {
 
     function handleDelete(e){
@@ -38,14 +40,17 @@ function PostFeedItem(props){
         <button onClick={handleDelete}>Delete Post</button>
       </div>
     )
+
+    postEditBtn = <button onClick={startEdit}>Edit Post</button>;
+    postDeleteBtn = <button onClick={handleDelete}>Delete Post</button>;
   }
 
   // when a post is being editted, this is rendered
   if(postEdit){
     return (
-      <div>
+      // <div>
         <PostForm post={props.post} postEdit={postEdit} endEdit={endEdit} />
-      </div>
+      // </div>
     )
   }
 
@@ -57,8 +62,8 @@ function PostFeedItem(props){
   let postComments = <div></div>
   if (props.post.comments && props.post.comments.length > 0) {
     postComments = (
-      <div>
-        {props.post.comments.sort((a, b) => a.id - b.id).map(comment => (
+      // <div>
+        props.post.comments.sort((a, b) => a.id - b.id).map(comment => (
         <div key={`post-${comment.post_id}-comment-${comment.id}`}>
           <CommentItem 
             comment={comment}
@@ -67,8 +72,8 @@ function PostFeedItem(props){
             refetch={props.refetch}
           />
         </div>
-        ))}
-      </div>
+        ))
+      // </div>
     );
   }
 
@@ -78,6 +83,10 @@ function PostFeedItem(props){
       <div className="author-and-options">
         <PostAuthorInfo post={props.post} />
         {postOptions}
+        {/* <div>
+          {postEditBtn}
+          {postDeleteBtn}
+        </div> */}
       </div>
       {postImages}
       {props.post.author.username}: {props.post.caption}

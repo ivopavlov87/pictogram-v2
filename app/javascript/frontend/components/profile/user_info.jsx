@@ -57,61 +57,65 @@ function UserInfo(props) {
 
     // user edit form
     return (
-      <div>
-        <form onSubmit={submitEdit}>
-          <label>
-            Username:
+      <div className="user-text-container">
+        <div className="user-edit-info">
+          <form onSubmit={submitEdit}>
+            <label>
+              Username:
+              <br />
+              <input
+                type="text"
+                maxLength="30"
+                value={userUsername}
+                onChange={(e) => setUserUsername(e.target.value)}
+              />
+              <br />
+              {userUsername.length}/30 characters
+            </label>
             <br />
-            <input
-              type="text"
-              maxLength="30"
-              value={userUsername}
-              onChange={(e) => setUserUsername(e.target.value)}
-            />
+            <label>
+              Name:
+              <br />
+              <input
+                type="text"
+                maxLength="50"
+                value={userName}
+                onChange={(e) => setUserName(e.target.value)}
+              />
+              <br />
+              {userName.length}/50 characters
+            </label>
             <br />
-            {userUsername.length}/30 characters
-          </label>
-          <br />
-          <label>
-            Name:
+            <label>
+              Email:
+              <br />
+              <input
+                type="text"
+                value={userEmail}
+                onChange={(e) => setUserEmail(e.target.value)}
+              />
+            </label>
             <br />
-            <input
-              type="text"
-              maxLength="50"
-              value={userName}
-              onChange={(e) => setUserName(e.target.value)}
-            />
+            <label>
+              Bio:
+              <br />
+              <textarea
+                maxLength="255"
+                rows="5"
+                cols="55"
+                value={userBio ? userBio : ""}
+                onChange={(e) => setUserBio(e.target.value)}
+              />
+              <br />
+              {userBio ? userBio.length : "0"}/255 characters
+            </label>
             <br />
-            {userName.length}/50 characters
-          </label>
-          <br />
-          <label>
-            Email:
-            <br />
-            <input
-              type="text"
-              value={userEmail}
-              onChange={(e) => setUserEmail(e.target.value)}
-            />
-          </label>
-          <br />
-          <label>
-            Bio:
-            <br />
-            <textarea
-              maxLength="255"
-              value={userBio ? userBio : ""}
-              onChange={(e) => setUserBio(e.target.value)}
-            />
-            <br />
-            {userBio ? userBio.length : "0"}/255 characters
-          </label>
-          <br />
-          <button onClick={endEdit}>Cancel Edit</button>
-          &nbsp;
-          <input type="submit" value="Submit Edit" />
-        </form>
-        <RenderErrors errors={props.errors} />
+            <button onClick={endEdit}>Cancel Edit</button>
+            &nbsp;
+            <input type="submit" value="Submit Edit" />
+          </form>
+          <RenderErrors errors={props.errors} />
+        </div>
       </div>
     );
   }
@@ -124,21 +128,24 @@ function UserInfo(props) {
   // show edit button if logged in user is owner of page, OR if user is an admin
   if (props.currentUser.username != "demoUser" && (props.user.id === props.currentUser.id || props.currentUser.admin_type)) {
     editLink = (
-      <div>
+
         <button onClick={props.beginEdit}>Edit Profile</button>
-        <br />
-      </div>
+
     );
   }
 
   return (
-    <div>
-      {editLink}
-      Username: {props.user.username}
+    <div className="user-text-container">
+      <div className="user-info">
+        <div>
+          {props.user.username}
+          <br />
+          <div className="user-name">{props.user.name}</div>
+        </div>
+        {editLink}
+      </div>
       <br />
-      Name: {props.user.name}
-      <br />
-      About {props.user.username}: {props.user.bio}
+      {props.user.bio}
     </div>
   );
 }

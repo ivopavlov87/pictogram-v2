@@ -12,20 +12,20 @@ function CommentItem(props){
     }
 
     commentOptions = (
-      <div>
-        <button onClick={handleDelete}>Delete Comment</button>
-      </div>
+        <button className="delete-button" onClick={handleDelete}>Delete Comment</button>
     )
   }
 
   return (
     <div className="comment-show-container">
-      <img
-        className="comment-author-picture"
-        src={props.comment.author.profilePicture}
-      ></img>
-      <div className="comment-user-and-body-container">
-        {props.comment.author.username}: {props.comment.body}
+      <div className="comment-content">
+        <img
+          className="comment-author-picture"
+          src={props.comment.author.profilePicture}
+        ></img>
+        <div className="comment-user-and-body-container">
+          {props.comment.author.username}: {props.comment.body}
+        </div>
       </div>
       {commentOptions}
     </div>

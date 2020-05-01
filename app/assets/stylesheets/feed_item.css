@@ -57,12 +57,28 @@
 
 .comment-show-container{
   display: flex;
-  /* justify-content: space-between; */
+  justify-content: space-between;
   border-top: 1px solid #eaeaea;
   border-bottom: 1px solid #eaeaea;
 }
 
+.comment-content {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
 .comment-user-and-body-container{
   display: flex;
+  flex-direction: row;
   align-items: center;
+}
+
+
+
+.delete-button {
+  display: flex;
+  flex-direction: column;
+  height: auto;
+  padding: 10px;
 }

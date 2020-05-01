@@ -98,16 +98,25 @@ function PostShow(props){
 
   // default render => displayed post
   return (
-    <div>
-      <PostAuthorInfo post={props.post} />
-      {postOptions}
+    // <div>
+    //   <PostAuthorInfo post={props.post} />
+    //   {postOptions}
+    //   {postImages}
+    //   <br />
+    //   Post caption: {props.post.caption}
+    //   {postComments}
+    //   <CommentForm postId={props.post.id} fetchPost={props.fetchPost} />
+    // </div>
+    <div className="feed-item">
+      <div className="author-and-options">
+        <PostAuthorInfo post={props.post} />
+        {postOptions}
+      </div>
       {postImages}
+      {props.post.author.username}: {props.post.caption}
       <br />
-      Post location: {props.post.location}
-      <br />
-      Post caption: {props.post.caption}
       {postComments}
-      <CommentForm postId={props.post.id} fetchPost={props.fetchPost} />
+      <CommentForm postId={props.post.id} refetch={props.refetch} />
     </div>
   );
 }

@@ -97,7 +97,6 @@ function PostForm(props){
 
   return (
     <div>
-      This is the Post Form
       {postAuthor}
       <form onSubmit={handlePostSubmit}>
         <label>

@@ -18,7 +18,7 @@ function PostFeed(props){
   }
 
   return (
-    <div>
+    <div className="feed-container">
       {Object.values(props.posts).sort((a, b) => b.id - a.id).map((post) => (
         <div key={`post-${post.id}`}>
           <PostFeedItem

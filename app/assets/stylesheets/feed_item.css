@@ -1,5 +1,10 @@
-.feed-item{
+.feed-container {
   width: 614px;
+  margin: 0 auto;
+}
+
+.feed-item{
+  /* width: 614px; */
   border: 1px solid #eaeaea;
   margin: 0px auto 5px auto;
 }

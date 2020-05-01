@@ -44,7 +44,6 @@ function PostFeedItem(props){
   if(postEdit){
     return (
       <div>
-        A post is being editted.
         <PostForm post={props.post} postEdit={postEdit} endEdit={endEdit} />
       </div>
     )

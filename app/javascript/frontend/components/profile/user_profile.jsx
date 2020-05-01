@@ -131,7 +131,6 @@ class UserProfile extends React.Component {
             editState={this.state.editProfile}
           />
           <br />
-          {this.props.user.username}'s posts:
           {Object.values(this.props.user.posts)
             .sort((a, b) => b.id - a.id)
             .map((post) => (
